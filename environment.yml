@@ -8,6 +8,8 @@ dependencies:
     - matplotlib
     - jupyter
     - scipy
+    - pycurl
+    - conda-forge::gdal
     - scikit-learn
     - scikit-image
     - anaconda::opencv
