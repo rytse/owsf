@@ -1,0 +1,13 @@
+name: owsf
+channels:
+    - conda-forge
+    - anaconda
+dependencies:
+    - python=3.6
+    - numpy
+    - matplotlib
+    - scipy
+    - scikit-learn
+    - scikit-image
+    - anaconda::opencv
+    - conda-forge::earthengine-api
