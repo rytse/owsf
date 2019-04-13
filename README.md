@@ -1,2 +1,2 @@
 # owsf
-Open Weapon Site Finder
+Open Weapon Site Finder.
