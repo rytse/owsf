@@ -11,10 +11,6 @@ We ran a Convolutional Neural Network that was fed the images of all such locati
 
 More information available on this project's [website](https://rytse.github.io/owsf/).
 
-### Map View Link:
-
-[Click Here!](https://cbsimmons4.github.io/owsf/)
-
 ## Built With
 
 * [ArcGIS Online](http://www.arcgis.com/index.html) - Map
