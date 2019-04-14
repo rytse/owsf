@@ -1,29 +1,17 @@
-
-# coding: utf-8
-
-# In[2]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
-# from __future__ import print_function
+
 import keras
+from keras import models
+from keras import layers
+from keras import optimizers
 from keras.preprocessing.image import ImageDataGenerator, load_img
 
-
-# In[3]:
-
+from keras.applications import VGG16
 
 train_dir = '../data/rgb/train'
 validation_dir = '../data/rgb/val'
 image_size = 224
-
-
-# In[4]:
-
-
-from keras.applications import VGG16
 
 #Load the VGG model
 vgg_conv = VGG16(weights='imagenet', include_top=False, input_shape=(image_size, image_size, 3))
@@ -35,11 +23,6 @@ for layer in vgg_conv.layers[:]:
 # Check the trainable status of the individual layers
 for layer in vgg_conv.layers:
     print(layer, layer.trainable)
-
-
-from keras import models
-from keras import layers
-from keras import optimizers
 
 # Create the model
 model = models.Sequential()
@@ -56,11 +39,7 @@ model.add(layers.Dense(3, activation='softmax'))
 # Show a summary of the model. Check the number of trainable parameters
 model.summary()
 
-
-# In[ ]:
-
-
-# No Data augmentation 
+# No Data augmentation (TODO augment)
 train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
 
@@ -121,4 +100,3 @@ plt.title('Training and validation loss')
 plt.legend()
 
 plt.show()
-
