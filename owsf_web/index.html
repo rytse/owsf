@@ -1,17 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
+<meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="description" content="My personal website">
     <meta name="author" content="Naveen Durvasula">
 
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
-    <title>Open Weapon Site Finder</title>
+    <title>OWSF</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +33,42 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.11/esri/themes/light/main.css"
+    />
+
+    <script src="https://js.arcgis.com/4.11/"> </script>
+
+    <script>
+      require(["esri/views/MapView", "esri/WebMap"], function(MapView, WebMap) {
+        /************************************************************
+         * Creates a new WebMap instance. A WebMap must reference
+         * a PortalItem ID that represents a WebMap saved to
+         * arcgis.com or an on-premise portal.
+         *
+         * To load a WebMap from an on-premise portal, set the portal
+         * url with esriConfig.portalUrl.
+         ************************************************************/
+        var webmap = new WebMap({
+          portalItem: {
+            // autocasts as new PortalItem()
+            id: "f33bd6a3fc554f39924161090ab22d0c"
+          }
+        });
+        /************************************************************
+         * Set the WebMap instance to the map property in a MapView.
+         ************************************************************/
+        var view = new MapView({
+          map: webmap,
+          container: "viewDiv"
+        });
+      });
+    </script>
+
    
+	
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
@@ -46,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Open Weapon Site Finder</a>
+                <a class="navbar-brand page-scroll" href="#page-top">OWSF</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -84,11 +123,74 @@
     <script src="js/StackBlur.js"></script>
     <script src="js/BGImage.js"></script>
 
-    <!-- Web Content -->
-    <script src="js/content.js"></script>
+<br><br><br><br><br><br>
+
+<div class="cbody">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Open Weapon Site Finder</h1>
+    <p class="lead">An open-source initiative for finding military sites using publically available remote sensing data and a tool of citizens holding their governments accountable.</p>
+  </div>
+</div>
+</div>
+
+<div class="cbody">
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+          <img src="img/comleb.jpg" alt="Intersections" width = "500" height="500" style="float : left; margin-right: 10px; margin-bottom: 5px;">
+    </div>
+
+    <div class="col-sm">
+      <img src="img/ersileb.jpg" alt="Intersections" width = "500" height="500" style="float : right; margin-right: 10px; margin-bottom: 5px;">
+    </div>
+	
+    </div>
+<br><br>
+<div class="alert alert-info" role="alert">
+  Examples of missiles found by OWSF in Lebannon.
+</div>
+
+</div>
 
 
-    <!-- Background change feature-->
+
+<br><br><br>
+
+<div class="cbody">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">How It's Done: Methods and APIs</h1>
+	<div class=container>    
+
+<div class=col-sm">
+<p class="lead">We used the Google Earth Engine to pull data from the Sentinel1 satellite. We analyzed Sentinel's C-band radar data and looked for places where missiles' guidance radars cause consistent interference. We detected this low-power but consistent interference by tracking the pixels that were the "brighest" over the longest period of time. Using this multi-temporal analysis method, we were able to detect several types of military radar systems (more on this later), but by applying a clever polarimetry trick, we were able to isolate C-band phased array radars, which are most commonly used for Patriot surface-to-air missiles. Specifically, we analyzed the "bright spots" in each polarization, and noted that phased array radars interfere with each polarization differently. These differences allowed us to identify Patriot missiles by distinct X-pattern shown below. From images like these, we performed image processing to isolate the coordinates of the missile sites. While we did not have time to run our image processing payload on the entire Earth, we applied our methods to several geographic regions, including part so the US, the Middle East, Western Europe, and Eastern Asia. The sites that we found are indicated below on the map.
+</div>
+
+<div class=col-sm">
+<center><img src="img/crosses.png" alt="Intersections" width = "500" height="500" style="float : left; margin-right: 10px; margin-bottom: 5px;"></center>
+</div>
+ </div>
+</div>
+</div>
+
+</div>
+
+
+<div id="viewDiv" style="width:800px;height:800px;border:3px solid black; margin:0 auto;"> </div>
+
+<p style="font-size:120%;">Authors:</p>
+    <p>
+    Ryan Tse: <a href="https://github.com/rytse"> rytse</a> <br>
+    Adeeb Abbas: <a href="https://github.com/adeeb10abbas"> adeeb10abbas</a> <br>
+    Cameron Simmons: <a href="https://github.com/cbsimmons4"> cbsimmons4</a> <br>
+    <br>
+</p>
+</div>
+
+
+<!-- Background change feature-->
     <script>
         inView('.post').on('enter', function (el) {
             var id = $(el).attr('data-bg');
@@ -98,6 +200,8 @@
         });
     </script>
 
+
 </body>
 
 </html>
+
