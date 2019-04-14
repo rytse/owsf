@@ -14,9 +14,12 @@ We ran a Convolutional Neural Network that was fed the images of all such locati
 
 [Click Here!](https://cbsimmons4.github.io/owsf/)
 
-## Map Built With
+## Built With
 
 * [ArcGIS Online](http://www.arcgis.com/index.html) - Map
+* [Google Cloud Platform](https://cloud.google.com) - VM
+* [Tensorflow](https://tensorflow.org) - ML Framework
+* [Google Earth Engine](https://earthengine.google.com/) - Google Earth Engine
 
 ## Authors
 
