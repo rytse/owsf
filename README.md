@@ -11,9 +11,9 @@ We ran a Convolutional Neural Network that was fed the images of all such locati
 
 
 ### Map View Link:
-```
-https://cbsimmons4.github.io/owsf_public/
-```
+
+[Click Here!](https://cbsimmons4.github.io/owsf_public/)
+
 
 ## Built With
 
