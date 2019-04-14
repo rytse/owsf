@@ -12,10 +12,9 @@ We ran a Convolutional Neural Network that was fed the images of all such locati
 
 ### Map View Link:
 
-[Click Here!](https://cbsimmons4.github.io/owsf_public/)
+[Click Here!](https://cbsimmons4.github.io/owsf/)
 
-
-## Built With
+## Map Built With
 
 * [ArcGIS Online](http://www.arcgis.com/index.html) - Map
 
