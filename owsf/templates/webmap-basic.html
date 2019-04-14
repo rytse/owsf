@@ -27,16 +27,7 @@
     <script src="https://js.arcgis.com/4.11/"></script>
 
     <script>
-      require(["esri/views/MapView", "esri/WebMap",
-        "esri/Graphic",
-        "esri/geometry/Point",
-        "esri/symbols/SimpleMarkerSymbol",
-        "esri/geometry/Polyline",
-        "esri/symbols/SimpleLineSymbol",
-        "esri/geometry/Polygon",
-        "esri/geometry/Extent",
-        "esri/symbols/SimpleFillSymbol"], function(MapView, WebMap, Graphic, Point, SimpleMarkerSymbol, Polyline, SimpleFillSymbol,
-          Polygon, Extent, SimpleFillSymbol) {
+      require(["esri/views/MapView", "esri/WebMap"], function(MapView, WebMap) {
         /************************************************************
          * Creates a new WebMap instance. A WebMap must reference
          * a PortalItem ID that represents a WebMap saved to
@@ -59,90 +50,10 @@
           map: webmap,
           container: "viewDiv"
         });
-
-        // Create a symbol for rendering the graphic
-        var fillSymbol = new SimpleFillSymbol({
-          color: [227, 139, 79, 0],
-          outline: {
-          color: [0, 0, 0],
-          width: .3
-          }
-        });
-
-        //  Middle_East  41.137081, 28.780227     28.934843, 48.239208
-        var Middle_East_region = new Extent({
-            // autocasts as new Extent()
-            xmin: 28.780227,
-            ymin: 28.934843,
-            xmax: 48.239208,
-            ymax: 41.137081,
-            spatialReference: 4326
-        });
-        // Add the geometry and symbol to a new graphic
-        var Middle_East_Graphic = new Graphic({
-          geometry: Middle_East_region,
-          symbol: fillSymbol,
-        });
-        // Add the graphic to the view
-        view.graphics.add(Middle_East_Graphic);
-
-        // Europe     59.084463,4.23123    52.82251,20.086696
-        var Europe_region = new Extent({
-            // autocasts as new Extent()
-            xmin: 4.23123,
-            ymin: 52.82251,
-            xmax: 20.086696,
-            ymax: 59.084463,
-            spatialReference: 4326
-        });
-        // Add the geometry and symbol to a new graphic
-        var Europe_Graphic = new Graphic({
-          geometry: Europe_region,
-          symbol: fillSymbol,
-        });
-        // Add the graphic to the view
-        view.graphics.add(Europe_Graphic);
-
-        // North America    30.322289, -84.243317    21.169193,-75.04117
-        var North_America_region = new Extent({
-            // autocasts as new Extent()
-            xmin: -84.243317,
-            ymin: 21.169193,
-            xmax: -75.04117,
-            ymax: 30.322289,
-            spatialReference: 4326
-        });
-        // Add the geometry and symbol to a new graphic
-        var North_America_Graphic = new Graphic({
-          geometry: North_America_region,
-          symbol: fillSymbol,
-        });
-        // Add the graphic to the view
-        view.graphics.add(North_America_Graphic);
-
-
-        // Asia    36.594309, 70.724632    31.724374, 77.000019
-        var Asia_region = new Extent({
-            // autocasts as new Extent()
-            ymin: 31.724374,
-            xmin: 70.724632,
-            ymax: 36.594309,
-            xmax: 77.000019,
-            spatialReference: 4326
-        });
-        // Add the geometry and symbol to a new graphic
-        var Asia_Graphic = new Graphic({
-          geometry: Asia_region,
-          symbol: fillSymbol,
-        });
-        // Add the graphic to the view
-        view.graphics.add(Asia_Graphic);
-
-      }); 
-
+      });
     </script>
   </head>
-  
+
   <body>
     <div id="viewDiv"></div>
   </body>
