@@ -3,11 +3,7 @@
 ![Intersections](https://cdn-images-1.medium.com/max/1000/1*dhY45s6L3Cqh82NMGwHGww.png)
 ![Intersection mapped out on Google Maps](https://cdn-images-1.medium.com/max/1000/1*ZpqoD2puhxw5aMiZ5eHi0w.png)
 
-We used Google's Earth Engine to locate the sites of a patriot battery or a early warning system. So anywhere in the world these artifacts appear, they may point to a location of a patriot battery, or other early warning system. Displaying a combination of VH and VV polarizations will result in overlapping ascending and descending orbit interferences, we see that they consistently converge.
-
-These intersections, when put on the ArcGIS maps(using their coordinates) lead us to discover that they are locations used by military or some military activity. 
-
-We ran a Convolutional Neural Network that was fed the images of all such locations and others during training to find out all the other(basically predict with a degree of confidence) locations of the sites of potential military operations.
+We used the Google Earth Engine to pull data from the Sentinel1 satellite. We analyzed Sentinel's C-band radar data and looked for places where missiles' guidance radars cause consistent interference. We detected this low-power but consistent interference by tracking the pixels that were the "brighest" over the longest period of time. Using this multi-temporal analysis method, we were able to detect several types of military radar systems (more on this later), but by applying a clever polarimetry trick, we were able to isolate C-band phased array radars, which are most commonly used for Patriot surface-to-air missiles. Specifically, we analyzed the "bright spots" in each polarization, and noted that phased array radars interfere with each polarization differently. These differences allowed us to identify Patriot missiles by distinct X-pattern shown below. From images like these, we performed image processing to isolate the coordinates of the missile sites. While we did not have time to run our image processing payload on the entire Earth, we applied our methods to several geographic regions, including part so the US, the Middle East, Western Europe, and Eastern Asia. The sites that we found are indicated below on the map.
 
 More information available on this project's [website](https://rytse.github.io/owsf/).
 
