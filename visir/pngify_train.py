@@ -1,8 +1,11 @@
-import ee
 import numpy as np
-import matplotlib
+import matplotlib.pyplot as plt
+import pandas as pd
+import cv2
 
-ee.Initialize()
+import gdal
+
+gdal.AllRegister()
 
 # Parse places
 p_df = pd.read_csv('../data/target.csv')
@@ -14,31 +17,28 @@ for index, row in p_df.iterrows():
     places[row['name']] = np.array([row['lat'] - WIDTH, row['lon'] - WIDTH, row['lat'] + WIDTH, row['lon'] + WIDTH])
 
 for place in places:
-    rgb_ds = gdal.Open(f'./data/rgb_{place}.tif')
-    ir_ds = gdal.Open(f'./data/ir_{place}.tif')
+    if place[0] != 'n':
+        continue
 
-    r = rgb_ds.GetRasterBand(1).ReadAsArray()
-    g = rgb_ds.GetRasterBand(2).ReadAsArray()
-    b = rgb_ds.GetRasterBand(3).ReadAsArray()
-    rgb = np.array([r, g, b])
+    rgb_ds = gdal.Open(f'../data/tif/rgb_{place}.tif')
+#    ir_ds = gdal.Open(f'../data/tif/ir_{place}.tif')
 
-    ir1 = ir_ds.GetRasterBand(1).ReadAsArray()
-    ir2 = ir_ds.GetRasterBand(2).ReadAsArray()
-    therm = ir_ds.GetRasterBand(3).ReadAsArray()
-    ir = np.array([ir1, ir2, therm])
+    rgb_l = []
+    for k in range(1, 4):
+        rep = rgb_ds.GetRasterBand(k).ReadAsArray() # TODO handle fully NaN cases?
+        rep[np.isnan(rep)]=np.median(rep[np.isfinite(rep)])-np.std(rep[np.isfinite(rep)])
+        rep = rep - np.min(rep)
+        rep = rep / np.max(rep) * 255
+        rgb_l.append(rep)
+    img = cv2.merge((rgb_l[2], rgb_l[1], rgb_l[0]))
+    cv2.imwrite(f'../data/rgb_{place}.png', img)
 
-    for i in range(3):
-        # Strip NaNs (I think these appear where data is redacted)
-        rgb[i][np.isnan(rgb[i])]=np.median(rgb[i][np.isfinite(rgb[i])])-np.std(rgb[i][np.isfinite(rgb[i])])
-        ir[i][np.isnan(ir[i])]=np.median(ir[i][np.isfinite(ir[i])])-np.std(ir[i][np.isfinite(ir[i])])
-
-        # Scale to [0, 255]
-        rgb[i] = rgb[i] - np.min(rgb[i])
-        rgb[i] = rgb[i] / np.max(rgb[i]) * 255
-        ir[i] = ir[i] - np.min(ir[i])
-        ir[i] = ir[i] / np.max(ir[i]) * 255
-
-    # Plot
-    matplotlib.image.imsave(f'rgb_{place}.png', rgb)
-    matplotlib.image.imsave(f'ir_{place}.png', ir)
-
+#    ir_l = []
+#    for k in range(1, 4):
+#        rep = ir_ds.GetRasterBand(k).ReadAsArray() # TODO handle fully NaN cases?
+#        rep[np.isnan(rep)]=np.median(rep[np.isfinite(rep)])-np.std(rep[np.isfinite(rep)])
+#        rep = rep - np.min(rep)
+#        rep = rep / np.max(rep) * 255
+#        ir_l.append(rep)
+#    img = cv2.merge((ir_l[2], ir_l[1], ir_l[0]))
+#    cv2.imwrite(f'../data/ir_{place}.png', img)

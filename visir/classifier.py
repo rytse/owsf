@@ -5,13 +5,13 @@ import keras
 from keras import models
 from keras import layers
 from keras import optimizers
-from keras.preprocessing.image import ImageDataGenerator, load_img
+from keras.preprocessing.image import ImageDataGenerator
 
 from keras.applications import VGG16
 
 train_dir = '../data/rgb/train'
-validation_dir = '../data/rgb/val'
-image_size = 224
+validation_dir = '../data/rgb/validation'
+image_size = 1004
 
 #Load the VGG model
 vgg_conv = VGG16(weights='imagenet', include_top=False, input_shape=(image_size, image_size, 3))
@@ -34,7 +34,7 @@ model.add(vgg_conv)
 model.add(layers.Flatten())
 model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dropout(0.5))
-model.add(layers.Dense(3, activation='softmax'))
+model.add(layers.Dense(2, activation='softmax'))
 
 # Show a summary of the model. Check the number of trainable parameters
 model.summary()
@@ -44,8 +44,8 @@ train_datagen = ImageDataGenerator(rescale=1./255)
 validation_datagen = ImageDataGenerator(rescale=1./255)
 
 # Change the batchsize according to your system RAM
-train_batchsize = 100
-val_batchsize = 10
+train_batchsize = 4
+val_batchsize = 4
 
 # Data Generator for Training data
 train_generator = train_datagen.flow_from_directory(
