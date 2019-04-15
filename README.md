@@ -12,6 +12,7 @@ More information available on this project's [website](https://rytse.github.io/o
 * [ArcGIS Online](http://www.arcgis.com/index.html) - Map
 * [Google Cloud Platform](https://cloud.google.com) - VM
 * [Tensorflow](https://tensorflow.org) - ML Framework
+* [Keras](https://keras.io/) - Pre-trained ResNet-101 and VGG16 models
 * [Google Earth Engine](https://earthengine.google.com/) - Google Earth Engine
 
 ## Authors
